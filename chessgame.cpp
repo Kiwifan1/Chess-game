@@ -4,7 +4,8 @@
  * Description: A good old fashioned chess game in console
  * Notes: 
  * 
- * 
+ * 11/1/2021 - creation of file
+ * 11/2/2021 - added building of chessboard
  **/
 
 #include "header.h"
@@ -23,8 +24,10 @@
  * Win/Lose if king in checkmate
  **/
 
-int main(int argc, char const *argv[])
+int main()
 {
-    cout << "hello world!";
+    //cout << "hello world!" << endl;
+    ChessBoard chessSet;
+    chessSet.printBoard();
     return 0;
 }
