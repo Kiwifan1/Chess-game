@@ -26,8 +26,6 @@
 
 int main()
 {
-    //cout << "hello world!" << endl;
-    ChessBoard chessSet;
-    chessSet.printBoard();
+    cout << "Hello World";
     return 0;
 }
