@@ -8,55 +8,15 @@
  * 11/2/2021 - creation of multiple methods and constructors for classes
  **/
 
-#ifndef HEADER_H
-#define HEADER_H
+#ifndef CHESSPIECES_H
+#define CHESSPIECES_H
 
-#include <iostream>
-#include <math.h>
-#include <vector>
-#include <string>
+#include "consolidates.h"
+#include "chessBoard.h"
 
 using namespace std;
 
-enum Color
-{
-    WHITE,
-    BLACK
-};
-
-enum PieceType
-{
-    PAWN,
-    ROOK,
-    KNIGHT,
-    BISHOP,
-    QUEEN,
-    KING
-};
-
-struct Position
-{
-private:
-    int x;
-    int y;
-
-public:
-
-    Position()
-    {
-        this->x = 0;
-        this->y = 0;
-    }
-
-    Position(int x, int y)
-    {
-        this->x = x;
-        this->y = y;
-    }
-
-    int getX() { return x; }
-    int getY() { return y; }
-};
+class ChessBoard;
 
 /**
  * @brief The Piece Class, this class is the base class for all the pieces
@@ -78,36 +38,12 @@ public:
     Position getPosition() { return position; }
     int getValue() { return value; }
 
-    bool isValidMove(Position newPosition);
-    bool isValidAttack(Position newPosition);
-    bool pieceInWay(Position newPosition, ChessBoard board);
-
+    virtual bool isValidMove(Position newPosition);
+    virtual bool isValidAttack(Position newPosition, Piece *piece);
+    virtual bool pieceInWay(Position pos1, ChessBoard &board);
 
     virtual string getName() = 0;
 };
-
-/**
- * @brief The ChessBoard Class, this class is the board that the game is played on
- *
- */
-
-class ChessBoard
-{
-
-private:
-    Piece[][] board;
-    Color turn;
-   
-public:
-    ChessBoard();
-    ChessBoard(Color startingTurn);
-    ChessBoard(Color startingTurn, Piece[][] board);
-    ~ChessBoard() { delete this; }
-
-    Color getTurn() { return turn; }
-    void printBoard();
-};
-
 
 /**
  * @brief The Pawn Class, this class is the pawn piece

@@ -8,7 +8,9 @@
  * 11/2/2021 - added building of chessboard
  **/
 
-#include "header.h"
+#include "consolidates.h"
+#include "chessBoard.h"
+#include "chessPieces.h"
 
 /**
  * TO-DOs:

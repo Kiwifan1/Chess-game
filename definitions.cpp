@@ -20,7 +20,9 @@
  * Win/Lose if king in checkmate
  **/
 
-#include "header.h"
+#include "consolidates.h"
+#include "chessPieces.h"
+#include "chessBoard.h"
 
 // ---------------- ChessBoard Methods -------------- //
 
@@ -32,12 +34,6 @@ ChessBoard::ChessBoard()
 ChessBoard::ChessBoard(Color startingTurn)
 {
     this->turn = startingTurn;
-}
-
-ChessBoard::ChessBoard(Color startingTurn, Piece[][] board)
-{
-    this->turn = startingTurn;
-    this->board = board;
 }
 
 ChessBoard::~ChessBoard()
@@ -94,66 +90,13 @@ bool Pawn::pieceInWay(Position newPosition, ChessBoard board)
 
 bool Pawn::isValidMove(Position newPosition)
 {
-    /* Checks for basic moves */
-    switch (color)
-    {
-    case WHITE:
-        /* Checking if the new position is one space ahead of the current position. */
-        if (newPosition.y == position.y + 1 && newPosition.x == position.x)
-        {
-            return true;
-        }
-        /* Checking if the new position is two spaces ahead of the current position. Only if pawn is on the initial rank */
-        else if (newPosition.y == position.y + 2 && position.y == 1 && newPosition.x == position.x)
-        {
-            return true;
-        }
-        break;
 
-    case BLACK:
-        /* Checking if the new position is one space ahead of the current position. */
-        if (newPosition.y == position.y - 1 && newPosition.x == position.x)
-        {
-            return true;
-        }
-        /* Checking if the new position is two spaces ahead of the current position. Only if pawn is on the initial rank */
-        else if (newPosition.y == position.y - 2 && position.y == 6 && newPosition.x == position.x)
-        {
-            return true;
-        }
-        break;
-    }
     return false;
 }
 
-bool Pawn::isValidAttack(Position newPosition, Color color)
+bool Pawn::isValidAttack(Position newPosition, Piece *piece)
 {
-    switch (color)
-    {
-    case WHITE:
-        /* Checking if attacking legally normally */
-        else if (pieceInWay(newPosition) && newPosition.y == position.y + 1 && (newPosition.x == position.x + 1 || newPosition.x == position.x - 1))
-        {
-            return true;
-        }
-
-        Position passantL = {position.x - 1, position.y};
-        Position passantR = {position.x + 1, position.y};
-        
-        /* Checking if attacking en Passant */
-        else if (newPosition.y == position.y + 1 && (pieceInWay(passantR) && newPosition.x == position.x + 1) ||
-                 (pieceInWay(passantL) && newPosition.x == position.x - 1))
-        {
-            return true;
-        }
-        {
-            return true;
-        }
-        break;
-
-    case BLACK:
-        break;
-    }
+    return false;
 }
 
 Piece Pawn::promote()
